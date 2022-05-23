@@ -87,7 +87,7 @@ class _PharmaDashBoardState extends State<PharmaDashBoard> {
           ],
         ),
       ),
-      body: Container(),
+      body: chatRoomList(),
     );
   }
 }

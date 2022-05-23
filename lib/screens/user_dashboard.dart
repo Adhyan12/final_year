@@ -174,7 +174,7 @@ class _UserDashBoardState extends State<UserDashBoard> {
                   cardChild: Column(
                     children: const[
                       Image(
-                        image: AssetImage('images/dog_training.png'),
+                        image: AssetImage('images/dog-training.png'),
                         width: 75,
                         height: 75,
                       ),
