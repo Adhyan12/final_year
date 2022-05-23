@@ -5,4 +5,7 @@ export 'vet_registration.dart';
 export 'login_screen.dart';
 export 'user_dashboard.dart';
 export 'vet_dashboard.dart';
-export 'pharma_dashboard.dart';
+export 'pharmacy_search_screen.dart';
+export 'vet_search_screen.dart';
+export 'conversation_screen.dart';
+export 'owner_search_screen.dart';

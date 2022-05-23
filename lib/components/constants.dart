@@ -29,3 +29,7 @@ const kInputBoxDecoration = InputDecoration(
     borderRadius: BorderRadius.all(
       Radius.circular(32.0),
     ),),);
+
+class Constants{
+  static String myName='';
+}

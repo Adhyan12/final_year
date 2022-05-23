@@ -35,48 +35,56 @@ class _VetRegistrationScreenState extends State<VetRegistrationScreen> {
           ],
         ),
       ),
-      body: Form(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        child: Form(
           child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Container(
-            child: Center(
-                child: Image.asset(
-              'images/doc.jpeg',
-              fit: BoxFit.contain,
-              height: 100,
-            )),
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Center(
+                child: Container(
+                  height: 100,
+                  width: 100,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('images/veterinarian.png'),
+                    ),
+                  ),
+                ),
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  icon: const Icon(Icons.person),
+                  hintText: 'Enter your name',
+                  labelText: 'Name',
+                ),
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0)),
+                  icon: const Icon(Icons.perm_contact_calendar_rounded),
+                  hintText: "What's your age",
+                  labelText: 'Age',
+                ),
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0)),
+                  icon: const Icon(Icons.pending_actions_rounded),
+                  hintText: 'Tell us about yourself',
+                  labelText: 'Description',
+                ),
+              ),
+            ],
           ),
-          TextField(
-            decoration: InputDecoration(
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(30.0)),
-              icon: const Icon(Icons.person),
-              hintText: 'Enter your name',
-              labelText: 'Name',
-            ),
-          ),
-          TextField(
-            decoration: InputDecoration(
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(30.0)),
-              icon: const Icon(Icons.perm_contact_calendar_rounded),
-              hintText: "What's your age",
-              labelText: 'Age',
-            ),
-          ),
-          TextField(
-            decoration: InputDecoration(
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(30.0)),
-              icon: const Icon(Icons.pending_actions_rounded),
-              hintText: 'Tell us about yourself',
-              labelText: 'Description',
-            ),
-          ),
-        ],
-      )),
+        ),
+      ),
     );
   }
 }

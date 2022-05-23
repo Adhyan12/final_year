@@ -39,7 +39,7 @@ class _GeneralRegistrationScreenState extends State<GeneralRegistrationScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
+
     checkConnectivity();
     super.initState();
   }
@@ -144,7 +144,7 @@ class _GeneralRegistrationScreenState extends State<GeneralRegistrationScreen> {
               ),
               const Center(
                 child: Text(
-                  'Crafted with ❤ by Adhyan',
+                  'Crafted with ❤',
                   style: TextStyle(fontSize: 20, fontFamily: 'Comfortaa', fontWeight: FontWeight.w200),
                 ),
               )

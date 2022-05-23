@@ -34,7 +34,7 @@ class _CamerasState extends State<Cameras> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
+
     _controller.dispose();
     super.dispose();
   }
