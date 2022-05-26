@@ -1,9 +1,7 @@
 import 'package:final_year_project/components/helperfunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:final_year_project/screens/screens.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:final_year_project/components/authservice.dart';
 import 'package:final_year_project/components/database.dart';
 import 'package:final_year_project/screens/pharma_dashboard.dart';
@@ -62,9 +60,7 @@ class PharmaRegistrationForm extends StatefulWidget {
 
 class _PharmaRegistrationFormState extends State<PharmaRegistrationForm> {
   var nameController = TextEditingController();
-
   var addController = TextEditingController();
-
   var numController = TextEditingController();
 
   bool codeSent = false;
@@ -141,39 +137,39 @@ class _PharmaRegistrationFormState extends State<PharmaRegistrationForm> {
               ),
             ),
             const SizedBox(height: 20,),
-            Padding(
-              padding: const EdgeInsets.only(left:20.0),
-              child: Row(
-                children: [
-                  Container(
-                      height: 140,
-                      width: 140,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          border: Border.all(color: Colors.blue),
-                          image: const DecorationImage(
-                              image: AssetImage(
-                            'images/building-placeholder.png',
-                          )))),
-                  const SizedBox(width: 5),
-                  TextButton(
-                    child: Row(children: const [
-                      Text(
-                        'Upload Photo',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      SizedBox(width: 5),
-                      Icon(
-                        Icons.upload_sharp,
-                        size: 30,
-                      )
-                    ]),
-                    onPressed: () {},
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20,),
+            // Padding(
+            //   padding: const EdgeInsets.only(left:20.0),
+            //   child: Row(
+            //     children: [
+            //       Container(
+            //           height: 140,
+            //           width: 140,
+            //           decoration: BoxDecoration(
+            //               borderRadius: BorderRadius.circular(30),
+            //               border: Border.all(color: Colors.blue),
+            //               image: const DecorationImage(
+            //                   image: AssetImage(
+            //                 'images/building-placeholder.png',
+            //               )))),
+            //       const SizedBox(width: 5),
+            //       TextButton(
+            //         child: Row(children: const [
+            //           Text(
+            //             'Upload Photo',
+            //             style: TextStyle(fontSize: 20),
+            //           ),
+            //           SizedBox(width: 5),
+            //           Icon(
+            //             Icons.upload_sharp,
+            //             size: 30,
+            //           )
+            //         ]),
+            //         onPressed: () {},
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            // const SizedBox(height: 20,),
             codeSent
                 ? Row(
                     children: [
@@ -225,8 +221,8 @@ class _PharmaRegistrationFormState extends State<PharmaRegistrationForm> {
                   phoneNo = '+91' + numController.text.toString();
                   //TODO: check for existing user
                   Map<String, String>pharmaMap = {
-                    'shopName': shopName,
-                    'shopAddress': shopAdd,
+                    'UserName': shopName,
+                    'Location': shopAdd,
                     'PhoneNo': phoneNo
                   };
                   codeSent
@@ -240,8 +236,9 @@ class _PharmaRegistrationFormState extends State<PharmaRegistrationForm> {
                     );
                   } else {
                     await database.createDocument(pharmaMap,'pharmacy');
-                    HelperFunctions.saveUserLoggedInSharedPreference(true);
-                    HelperFunctions.saveUserNameSharedPreference(shopName);
+                    await HelperFunctions.saveUserLoggedInSharedPreference(true);
+                    await HelperFunctions.saveUserNameSharedPreference(shopName);
+                    await HelperFunctions.saveUserTypeSharedPreference('pharmacy');
                     Navigator.pushReplacementNamed(context, PharmaDashBoard.id);
                   }
                 },

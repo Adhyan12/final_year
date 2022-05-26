@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:final_year_project/components/authservice.dart';
-
 import '../components/constants.dart';
 import '../components/database.dart';
 import '../components/helperfunctions.dart';
@@ -16,7 +15,6 @@ class PharmaDashBoard extends StatefulWidget {
 }
 
 class _PharmaDashBoardState extends State<PharmaDashBoard> {
-
   Database database = Database();
   bool flag = false;
 
@@ -28,14 +26,15 @@ class _PharmaDashBoardState extends State<PharmaDashBoard> {
       builder: (context, AsyncSnapshot snapShot) {
         return snapShot.hasData
             ? ListView.builder(
-            itemCount: snapShot.data.docs.length,
-            itemBuilder: (context, index) {
-              return ChatRoomTile(snapShot.data.docs[index]['chatRoomId']
-                  .toString()
-                  .replaceAll('_', '')
-                  .replaceAll(Constants.myName, ''),
-                  snapShot.data.docs[index]['chatRoomId']);
-            })
+                itemCount: snapShot.data.docs.length,
+                itemBuilder: (context, index) {
+                  return ChatRoomTile(
+                      snapShot.data.docs[index]['chatRoomId']
+                          .toString()
+                          .replaceAll('_', '')
+                          .replaceAll(Constants.myName, ''),
+                      snapShot.data.docs[index]['chatRoomId']);
+                })
             : Container();
       },
     );
@@ -55,10 +54,9 @@ class _PharmaDashBoardState extends State<PharmaDashBoard> {
       });
     });
     setState(() {
-      flag = true;
+      flag=true;
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -66,11 +64,11 @@ class _PharmaDashBoardState extends State<PharmaDashBoard> {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(
-            Icons.arrow_back_sharp,
-            size: 35,
+            Icons.exit_to_app_outlined,
+            size: 25,
             color: Colors.black,
           ),
-          onPressed: () async{
+          onPressed: () async {
             await AuthService().signOut();
             print(FirebaseAuth.instance.currentUser);
             Navigator.pop(context);
@@ -87,11 +85,48 @@ class _PharmaDashBoardState extends State<PharmaDashBoard> {
           ],
         ),
       ),
-      body: chatRoomList(),
+      body: Column(
+
+        children: [
+          Container(
+            padding: const EdgeInsets.only(left: 20.0, top: 20),
+            alignment: Alignment.centerLeft,
+            child: Text(
+              flag ? 'Welcome ${Constants.myName} !! 🐾 ' : 'Hello',
+              style: const TextStyle(
+                fontFamily: 'Comfortaa',
+                fontSize: 30.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          const SizedBox(height: 20,),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            alignment: Alignment.bottomLeft,
+            child: const Text('Chats',style: TextStyle(
+              fontFamily: 'Comfortaa',
+              fontSize: 25.0,
+              fontWeight: FontWeight.bold,
+            ),),
+          ),
+           Container(
+              margin: const EdgeInsets.symmetric(horizontal: 8),
+              padding:const EdgeInsets.symmetric(horizontal: 10),
+              height: MediaQuery.of(context).size.height * 0.65,
+              child: chatRoomList(),
+             decoration: BoxDecoration(
+               borderRadius: BorderRadius.circular(30.0),
+               border: Border.all(color: Colors.blue,width:1.5),
+             ),
+            ),
+
+
+        ],
+      ),
     );
   }
 }
-
 
 class ChatRoomTile extends StatelessWidget {
   final String usereName;
@@ -101,9 +136,12 @@ class ChatRoomTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context)=>ConversationScreen(chatRoomId: chatRoom)));
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    ConversationScreen(chatRoomId: chatRoom)));
       },
       child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),

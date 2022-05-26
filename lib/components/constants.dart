@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 
 const kInputBoxDecoration = InputDecoration(
   hintText: 'Enter Mobile Number',
@@ -32,4 +31,5 @@ const kInputBoxDecoration = InputDecoration(
 
 class Constants{
   static String myName='';
+  static String userType='';
 }

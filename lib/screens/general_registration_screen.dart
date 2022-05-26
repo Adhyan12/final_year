@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'screens.dart';
 import 'package:connectivity/connectivity.dart';
@@ -31,7 +29,6 @@ class _GeneralRegistrationScreenState extends State<GeneralRegistrationScreen> {
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
-      print('Internet');
     } else {
       toast();
     }

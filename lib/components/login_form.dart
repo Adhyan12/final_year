@@ -81,8 +81,8 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
                     child:
                     codeSent ? const Text('Login',style: TextStyle(fontSize: 20),) : const Text('Send OTP',style: TextStyle(fontSize: 20),)),
                 onPressed: () async {
-                  data = database.searchDocument('+91'+phoneNoController.text.toString());
-                  if(data==''){
+                  data = await database.searchDocument('+91'+phoneNoController.text);
+                  if(data=='not registered'){
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text('Not Registered'),
@@ -92,7 +92,7 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
                   else{
                     codeSent
                         ? AuthService().signInWithOTP(smsCode, verificationId)
-                        : verifyPhone('+91'+phoneNoController.text.toString());
+                        : verifyPhone('+91'+phoneNoController.text);
                     if (codeSent == false) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
@@ -102,13 +102,17 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
 
                       //TODO: check for username and pass it to respective screen
                     }else{
-                      // snapshotUserInfo= database.getDocumentsByPhoneNumber('+91'+phoneNoController.text, data);
-                      // HelperFunctions.saveUserNameSharedPreference(snapshotUserInfo.docs[0]['name']);
+                      QuerySnapshot val = await _firestore.collection(data).where('PhoneNo', isEqualTo: '+91'+phoneNoController.text).get();
+                      Constants.myName=val.docs[0]['UserName'];
+                      await HelperFunctions.saveUserLoggedInSharedPreference(true);
                       if(data=='user') {
+                        await HelperFunctions.saveUserTypeSharedPreference('user');
                         Navigator.pushReplacementNamed(context, UserDashBoard.id);
                       } else if(data=='vet') {
+                        await HelperFunctions.saveUserTypeSharedPreference('vet');
                         Navigator.pushReplacementNamed(context, VetDashBoard.id);
                       } else {
+                        await HelperFunctions.saveUserTypeSharedPreference('pharmacy');
                         Navigator.pushReplacementNamed(context, PharmaDashBoard.id);
                       }
                     }
@@ -119,6 +123,7 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
       ),
     );
   }
+
 
   Future<void> verifyPhone(phoneNo) async {
     // ignore: prefer_function_declarations_over_variables

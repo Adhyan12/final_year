@@ -12,17 +12,17 @@ class Database {
         .set(userMap);
   }
 
-  searchDocument(number) {
+  searchDocument(number)async {
+    print(number);
     final pharm = firestore.collection('pharmacy');
-    final val = pharm.where('shopPhone', isEqualTo: number);
-    if (val == null) {
+    QuerySnapshot val = await pharm.where('PhoneNo', isEqualTo: number).get();
+    if (val.docs.isEmpty) {
       final user = firestore.collection('user');
-      final val1 = user.where('MobNum', isEqualTo: number);
-      if (val1 == null) {
+      QuerySnapshot val1 = await user.where('PhoneNo', isEqualTo: number).get();
+      if (val1.docs.isEmpty) {
         final vet = firestore.collection('vet');
-        final val3 = vet.where('mobNum', isEqualTo: number);
-        print('{$val  $val1 $val3');
-        if (val3 == null)
+        QuerySnapshot val3 = await vet.where('PhoneNo', isEqualTo: number).get();
+        if (val3.docs.isEmpty)
           return 'not registered';
         else
           return 'vet';

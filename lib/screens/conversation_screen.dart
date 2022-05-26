@@ -16,7 +16,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
   Database database = Database();
   TextEditingController messageController = TextEditingController();
   late Stream chatMessageStream;
-  Widget ChatMessageList() {
+  Widget chatMessageList() {
     return StreamBuilder(
       stream: chatMessageStream,
       builder: (context, AsyncSnapshot snapShot) {
@@ -79,51 +79,49 @@ class _ConversationScreenState extends State<ConversationScreen> {
           ],
         ),
       ),
-      body: Container(
-        child: Stack(
-          children: [
-            ChatMessageList(),
-            Container(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                color: Colors.blueGrey,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                child: Row(
-                  children: [
-                    Expanded(
-                        child: TextField(
-                      style: const TextStyle(color: Colors.black),
-                      controller: messageController,
-                      decoration: const InputDecoration(
-                          hintText: 'Message...',
-                          hintStyle: TextStyle(color: Colors.white),
-                          border: InputBorder.none),
-                    )),
-                    GestureDetector(
-                      onTap: () {
-                        sendMessage();
-                      },
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          gradient: const LinearGradient(colors: [
-                            Color(0x36FFFFFF),
-                            Color(0x0FFFFFFF),
-                          ]),
-                          borderRadius: BorderRadius.circular(40),
-                        ),
-                        padding: const EdgeInsets.all(12),
-                        child: Image.asset('images/send.png'),
+      body: Stack(
+        children: [
+          chatMessageList(),
+          Container(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              color: Colors.blueGrey,
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              child: Row(
+                children: [
+                  Expanded(
+                      child: TextField(
+                    style: const TextStyle(color: Colors.black),
+                    controller: messageController,
+                    decoration: const InputDecoration(
+                        hintText: 'Message...',
+                        hintStyle: TextStyle(color: Colors.white),
+                        border: InputBorder.none),
+                  )),
+                  GestureDetector(
+                    onTap: () {
+                      sendMessage();
+                    },
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(colors: [
+                          Color(0x36FFFFFF),
+                          Color(0x0FFFFFFF),
+                        ]),
+                        borderRadius: BorderRadius.circular(40),
                       ),
-                    )
-                  ],
-                ),
+                      padding: const EdgeInsets.all(12),
+                      child: Image.asset('images/send.png'),
+                    ),
+                  )
+                ],
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

@@ -1,5 +1,4 @@
 import 'package:final_year_project/components/helperfunctions.dart';
-import 'package:final_year_project/screens/pharmacy_search_screen.dart';
 import 'package:final_year_project/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:final_year_project/components/reusable_card.dart';
@@ -222,7 +221,7 @@ class _UserDashBoardState extends State<UserDashBoard> {
             height: 20.0,
           ),
           ReusableCard(
-            cardChild: Container(
+            cardChild: SizedBox(
               height: MediaQuery.of(context).size.height * 0.47,
               child: chatRoomList(),
             ),

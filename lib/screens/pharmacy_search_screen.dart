@@ -22,10 +22,10 @@ class _PharmSearchScreenState extends State<PharmSearchScreen> {
     return ListView.builder(
         itemCount: searchSnapshot.docs.length,
         itemBuilder: (context, index) {
-          return SearchTile(
-            name: searchSnapshot.docs[index]["shopName"],
+          return searchTile(
+            name: searchSnapshot.docs[index]["UserName"],
             number: searchSnapshot.docs[index]["PhoneNo"],
-            location: searchSnapshot.docs[index]["shopAddress"],
+            location: searchSnapshot.docs[index]["Location"],
           );
         });
   }
@@ -58,7 +58,7 @@ class _PharmSearchScreenState extends State<PharmSearchScreen> {
         ));
   }
 
-  Widget SearchTile({required String name, required String location, required String number}){
+  Widget searchTile({required String name, required String location, required String number}){
     return Container(
       padding: const EdgeInsets.all(20),
       child: GestureDetector(

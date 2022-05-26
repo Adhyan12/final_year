@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-import 'package:final_year_project/main.dart';
 
 
 class Cameras extends StatefulWidget {
@@ -66,14 +65,12 @@ class _CamerasState extends State<Cameras> {
                 MaterialPageRoute(
                   builder: (context) =>
                       DisplayPictureScreen(
-                        // Pass the automatically generated path to
-                        // the DisplayPictureScreen widget.
+
                         imagePath: image.path,
                       ),
                 ),
               );
             } catch (e) {
-              // If an error occurs, log the error to the console.
               print(e);
             }
           },

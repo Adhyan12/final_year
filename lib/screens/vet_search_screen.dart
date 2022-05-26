@@ -20,8 +20,8 @@ class _VetSearchScreenState extends State<VetSearchScreen> {
         itemCount: searchSnapshot.docs.length,
         itemBuilder: (context, index) {
           return VetSearchTile(
-            name: searchSnapshot.docs[index]["name"],
-            number: searchSnapshot.docs[index]["phone"],
+            name: searchSnapshot.docs[index]["UserName"],
+            number: searchSnapshot.docs[index]["PhoneNo"],
             location: searchSnapshot.docs[index]["add"],
           );
         });

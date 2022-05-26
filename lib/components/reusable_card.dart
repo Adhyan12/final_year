@@ -5,9 +5,11 @@ class ReusableCard extends StatelessWidget {
 
   final Widget cardChild;
   final Color colour;
+
   @override
   Widget build(BuildContext context) {
     return Container(
+
       padding: const EdgeInsets.all(8.0),
       child: cardChild,
       decoration: BoxDecoration(

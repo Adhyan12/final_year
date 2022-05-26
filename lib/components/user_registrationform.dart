@@ -7,7 +7,6 @@ import 'package:final_year_project/screens/screens.dart';
 import 'package:final_year_project/components/authservice.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:final_year_project/screens/screens.dart';
 import 'package:final_year_project/components/database.dart';
 
 class UserRegistrationForm extends StatefulWidget {
@@ -183,9 +182,11 @@ class _UserRegistrationFormState extends State<UserRegistrationForm> {
                           //   onChanged: (value) => setState(() => age = value),
                           // ),
                           TextField(
+                            keyboardType: TextInputType.phone,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30.0)),
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
                           icon: const Icon(Icons.pets_rounded),
                           hintText: "Your pet's age",
                           labelText: 'Age',
@@ -223,14 +224,16 @@ class _UserRegistrationFormState extends State<UserRegistrationForm> {
                   height: 20,
                 ),
                 Row(
-                  mainAxisSize: MainAxisSize.min,
+                  // mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    const Text('Gender',
+                        style: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.bold)),
                     const SizedBox(
-                      width: 30,
+                      height: 20,
                     ),
-                    const Text('Gender', style: TextStyle(fontSize: 20)),
                     Expanded(
-                      flex: 1,
                       child: ListTile(
                         leading: Radio(
                           value: Gender.male,
@@ -241,10 +244,11 @@ class _UserRegistrationFormState extends State<UserRegistrationForm> {
                             });
                           },
                         ),
+                        trailing:
+                            const Text('Male', style: TextStyle(fontSize: 25)),
                       ),
                     ),
                     Expanded(
-                      flex: 1,
                       child: ListTile(
                         leading: Radio(
                           value: Gender.female,
@@ -254,6 +258,10 @@ class _UserRegistrationFormState extends State<UserRegistrationForm> {
                               _gender = value;
                             });
                           },
+                        ),
+                        trailing: const Text(
+                          'Female',
+                          style: TextStyle(fontSize: 25),
                         ),
                       ),
                     ),
@@ -341,6 +349,8 @@ class _UserRegistrationFormState extends State<UserRegistrationForm> {
                           HelperFunctions.saveUserLoggedInSharedPreference(
                               true);
                           HelperFunctions.saveUserNameSharedPreference(name);
+                          HelperFunctions.saveUserTypeSharedPreference('user');
+                          // print(HelperFunctions.ge)
                           Navigator.pushReplacementNamed(
                               context, UserDashBoard.id);
                         }
