@@ -8,6 +8,8 @@ import 'package:camera/camera.dart';
 import 'package:final_year_project/screens/pharma_dashboard.dart';
 
 var firstCamera;
+
+
 void main() async {
   try {
     WidgetsFlutterBinding.ensureInitialized();
