@@ -1,6 +1,6 @@
-# final_year_project
+# Paw
 
-tinder for dogs
+Paw is a complete app for pet care.
 
 ## Getting Started
 
